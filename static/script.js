@@ -75,3 +75,36 @@ function registerNewUser() {
 /*
 ************* register functionality end
 */
+
+
+/*
+************* dashboard functionality begin
+*/
+
+checkForValidLoginSession()
+
+function checkForValidLoginSession() {
+    /*
+    tengo que ir a buscar el elemento wUserArray, si no esta vacio
+    entonces dejo pasar al dashboard si no es el caso entonces debo redirigir
+    hacia el login
+    */
+
+    if (window.location.href.includes("dashboard")) {
+        if (sessionStorage.getItem("wUserArray") == null) {
+            window.location.href = "http://localhost:5000/login"
+            //window.location.href = "http://heroku:5000/login";
+        }
+        else {
+            if (sessionStorage.length() == 0) {
+                window.location.href = "http://localhost:5000/login"
+                //window.location.href = "http://heroku:5000/login";
+            }
+        }
+    }
+
+}
+
+/*
+************* dashboard functionality end
+*/
