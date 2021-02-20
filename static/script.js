@@ -81,7 +81,14 @@ function registerNewUser() {
 ************* dashboard functionality begin
 */
 
-checkForValidLoginSession()
+
+
+if (window.location.href.includes("dashboard")) {
+    //un if general para el dashboard y asi podemos poner todos los metodos que necesitemos
+    checkForValidLoginSession()
+    setUserNameOnDashboard()
+    w3.includeHTML()
+}
 
 function checkForValidLoginSession() {
     /*
@@ -90,19 +97,30 @@ function checkForValidLoginSession() {
     hacia el login
     */
 
-    if (window.location.href.includes("dashboard")) {
-        if (sessionStorage.getItem("wUserArray") == null) {
+    if (sessionStorage.getItem("wUserArray") == null) {
+        window.location.href = "http://localhost:5000/login"
+        //window.location.href = "http://heroku:5000/login";
+    }
+    else {
+        if (sessionStorage.length == 0) {
             window.location.href = "http://localhost:5000/login"
             //window.location.href = "http://heroku:5000/login";
         }
-        else {
-            if (sessionStorage.length() == 0) {
-                window.location.href = "http://localhost:5000/login"
-                //window.location.href = "http://heroku:5000/login";
-            }
-        }
     }
+}
 
+function setUserNameOnDashboard() {
+    var userArray = JSON.parse(sessionStorage.getItem("wUserArray"))
+    var currentUser = userArray[0].user
+
+    var userSpan = document.getElementById("user")
+    userSpan.innerText = "Hello, " + currentUser
+}
+
+function logout() {
+    sessionStorage.removeItem("wUserArray")
+    window.location.href = "http://localhost:5000/"
+    //window.location.href = "http://heroku:5000/";
 }
 
 /*

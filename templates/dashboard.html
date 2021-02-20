@@ -14,9 +14,27 @@
     <br>
 
     <div>
-        <a href="#">logout</a>
+        <span id="user"></span>
     </div>
 
+
+    <div class="main">
+        <div class="container">
+            <a href="#" onclick="">addition</a>
+        </div>
+
+        <div class="main__section">
+            <div style="display:none" id="add" name="w3includes" w3-include-html="http://localhost:5000/add">
+            </div>
+        </div>
+
+    </div>
+
+    <div>
+        <a onclick="logout()" href="">logout</a>
+    </div>
+
+    <script src="https://www.w3schools.com/lib/w3.js"></script>
     <script src="{{url_for('static', filename='script.js')}}"></script>
 </body>
 
